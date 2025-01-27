@@ -40,20 +40,43 @@ It should print some simple help information instructing you to specify the name
 Pass in a relevant configuration header file path for your system, such as `configurations/x86_64-unknown-linux-clang.h`, to generate a build directory for that configuration.
 Build directories are generated at `build/<configuration-name>`, where the configuration name is the file name you specified without extensions or parent directories included.
 
+```sh
+$ ./config configurations/x86_64-unknown-linux-clang.h
+```
+
 Navigate to the newly created build directory to continue the build process.
+
+```sh
+$ cd build/x86_64-unknown-linux-clang
+```
 
 ### Build the configured build tool
 
 In the build directory is a copy of the `nob.h` header and a newly created `nob.c`, copied from the `nob.template.c` file found at the project root.
 Compile the nob build tool in the same way you did the config tool in the previous step, invoking your compiler without additional arguments.
 
+```sh
+$ cc -o nob nob.c
+```
+
 ### Run the build tool
 
 Then run the resulting executable file.
 Build artifacts will be placed in the `out` directory, and the final project executables will be copied into this build configuration folder for easier access.
+
+```sh
+$ ./nob
+```
 
 ### Clean up build directories
 
 Both the `config` and `nob` tools support the `clean` command.
 Running `nob clean` in its build directory will remove all of the build artifacts.
 Running `config clean` at the project root will remove all build directories, and any build artifacts in the project root directory if you specified an in-source build during configuration.
+
+```sh
+# in a build configuration directory
+$ ./nob clean
+# or, at the project root
+$ ./config clean
+```
