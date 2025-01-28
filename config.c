@@ -170,6 +170,10 @@ int main(int argc, char** argv) {
 
     const char* config_build_dir;
     if (build_out_of_source) {
+        if (!nob_mkdir_if_not_exists("build")) {
+            nob_return_defer(1);
+        }
+
         config_build_dir = nob_temp_sprintf("build/%.*s", (int)config_name.count, config_name.data);
 
         if (!nob_mkdir_if_not_exists(config_build_dir)) {
